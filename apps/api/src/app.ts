@@ -2,9 +2,9 @@ import express from "express";
 import cors from "cors";
 import {z} from "zod";
 import {FakeStoreProvider,topRated,type ProductProvider} from "./catalogue.js";
-import {enquirySchema,LocalEmailProvider,type EmailProvider} from "./enquiries.js";
+import {createEmailProvider,enquirySchema,type EmailProvider} from "./enquiries.js";
 export function createApp(deps:{products?:ProductProvider;email?:EmailProvider}={}){
- const products=deps.products??new FakeStoreProvider();const email=deps.email??new LocalEmailProvider();const app=express();
+ const products=deps.products??new FakeStoreProvider();const email=deps.email??createEmailProvider();const app=express();
  app.use(cors({origin:process.env.WEB_ORIGIN?.split(",")??true}));app.use(express.json({limit:"32kb"}));
  app.get("/api/health",(_req,res)=>res.json({status:"ok"}));
  app.get("/api/products/featured",async(_req,res,next)=>{try{res.json(topRated(await products.all(),5));}catch(e){next(e);}});
