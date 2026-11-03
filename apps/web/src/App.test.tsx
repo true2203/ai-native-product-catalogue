@@ -1,0 +1,4 @@
+import {beforeEach,describe,it,expect,vi} from "vitest";import {fireEvent,render,screen} from "@testing-library/react";import App from "./App";
+const products=[{id:1,title:"Test Object",price:12,description:"A useful thing",category:"electronics",image:"https://example.com/a.png",rating:{rate:4.5,count:10}}];
+beforeEach(()=>{vi.stubGlobal("fetch",vi.fn(async(input:RequestInfo|URL)=>{const url=String(input);const data=url.includes("/categories")?["electronics"]:url.includes("/products/1")?products[0]:products;return{ok:true,json:async()=>data} as Response;}));});
+describe("catalogue UI",()=>{it("renders a featured product",async()=>{render(<App/>);expect(await screen.findByRole("button",{name:/view test object/i})).toBeInTheDocument();});it("opens product details",async()=>{render(<App/>);fireEvent.click(await screen.findByRole("button",{name:/view test object/i}));expect(await screen.findByRole("button",{name:/make an enquiry/i})).toBeInTheDocument();});});
