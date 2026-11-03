@@ -20,7 +20,7 @@ A responsive product catalogue built with React, TypeScript, Express, and the Fa
 - **ProductProvider** — isolates Fake Store API integration.
 - **EmailProvider** — isolates email delivery.
 
-See DECISIONS.md for architectural trade-offs and AI_USAGE.md for AI-use disclosure and the verification checklist.
+See DECISIONS.md for architectural trade-offs, AI_USAGE.md for AI-use disclosure and verification guidance, and TIME_BREAKDOWN.md for the effort record requested by the assignment.
 
 ## Requirements
 
@@ -62,8 +62,8 @@ To deliver email to a real sales inbox, configure these variables for the API pr
 | SMTP_FROM | Sender address |
 | SALES_INBOX | Destination sales inbox |
 
-Do not commit credentials. Use environment variables or a secret manager in deployment. Configure WEB_ORIGIN to restrict API CORS origins outside local development.
+An example file is provided at apps/api/.env.example. Copy it to apps/api/.env or set the variables in your environment. Do not commit credentials. Use a secret manager in deployment. Configure WEB_ORIGIN to restrict API CORS origins outside local development.
 
 ## Assignment notes
 
-No paid infrastructure is required for local evaluation. Actual time spent should be recorded by the author; no fabricated time estimate is included.
+No paid infrastructure is required for local evaluation. Actual time spent should be recorded in TIME_BREAKDOWN.md; durations are intentionally left blank rather than fabricated.
